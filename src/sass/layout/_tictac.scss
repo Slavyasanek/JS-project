@@ -29,4 +29,18 @@
     &__text, &__again {
         font-size: 50px;
     }
+    &__again {
+        background-color: $decorativeColor;
+        height: 56px;
+        border-radius: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-color: transparent;
+        &:hover {
+            color: $oddColor;
+        }
+        &.disabled {
+            display: none;
+        }
+    }
 }

@@ -8,13 +8,13 @@ const makeStep = (e) => {
     const step = e.target;
     if (!step.innerHTML) {
         step.innerHTML = "x";
+        checkWinner();
         i += 1;
         if (i > 4) {
             return;
         } else {
             botStep();
         }
-        checkWinner();
     }
 }
 game.addEventListener("click", makeStep);
@@ -30,6 +30,19 @@ const botStep = () => {
     } else {
         botStep();
     }
+}
+
+const checkFreeSteps = () => {
+    let result = false;
+    for(let i = 0; i < gameSteps.length; i++) {
+		if (gameSteps[i].hasChildNodes()){
+			result = false;
+		} else {
+			result = true;
+			break;
+		}
+	}
+    return result;
 }
 
 const checkWinner = () => {
@@ -62,6 +75,12 @@ const checkWinner = () => {
             }
 
         }
+    }
+    if(!checkFreeSteps()) {
+        gameResult.textContent = "It is a draw!";
+        playAgain.classList.remove('disabled');
+        playAgain.textContent = "Wanna play again?";
+        game.removeEventListener("click", makeStep);
     }
 }
 

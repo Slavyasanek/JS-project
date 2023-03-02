@@ -1,2 +1,0 @@
-const e=document.querySelector(".game"),t=document.querySelectorAll(".game__inner");document.querySelector(".result__text"),document.querySelector("result__again");e.addEventListener("click",makeStep=e=>{const t=e.target;t.innerHTML||(t.innerHTML="x",n(),t.removeEventListener("click",makeStep))});const n=()=>{let e=Number.parseInt(Math.floor(8*Math.random()+0));t[e].innerHTML?n():t[e].innerHTML="o"};console.log(e.children);
-//# sourceMappingURL=index.c8629338.js.map

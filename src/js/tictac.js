@@ -4,20 +4,20 @@ const gameResult = document.querySelector('.result__text');
 const playAgain = document.querySelector('.result__again');
 
 let i = 0;
-game.addEventListener("click", makeStep = (e) => {
+const makeStep = (e) => {
     const step = e.target;
     if (!step.innerHTML) {
         step.innerHTML = "x";
         i += 1;
         if (i > 4) {
-            i = 0;
             return;
         } else {
             botStep();
         }
         checkWinner();
     }
-})
+}
+game.addEventListener("click", makeStep);
 
 const getRandomInt = () => {
     return Math.floor(Math.random() * (8 - 0) + 0);
@@ -53,21 +53,14 @@ const checkWinner = () => {
                 gameResult.textContent = "You win!";
                 playAgain.classList.remove('disabled');
                 playAgain.textContent = "Wanna play again?";
+                game.removeEventListener("click", makeStep);
             } else {
                 gameResult.textContent = "Bot winned:(";
                 playAgain.classList.remove('disabled');
                 playAgain.textContent = "Wanna play again?";
+                game.removeEventListener("click", makeStep);
             }
 
-        } else {
-            const hasStep = (element) => {
-                return element.innerHTML;
-            }
-            if ([...gameSteps].every(hasStep)) {
-                gameResult.textContent = "It is a draw! Nobody winned";
-                playAgain.classList.remove('disabled');
-                playAgain.textContent = "Wanna play again?";
-            }
         }
     }
 }
@@ -77,6 +70,7 @@ playAgain.addEventListener("click", clearGame = () => {
     gameResult.textContent = "";
     playAgain.textContent = "";
     playAgain.classList.add('disabled');
+    i = 0;
+    game.addEventListener("click", makeStep);
 })
 
-console.log(gameSteps)
